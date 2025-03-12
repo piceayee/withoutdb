@@ -228,7 +228,6 @@ async function loadMarkersFromJson(url) {
 
 // 啟動載入
 loadAllMarkersFromGitHub();
-		//03102200施工範圍//
 		let markers = []; // 儲存所有標記
 		function addMarkerToMap(markerData) {
 			let markerColor = "blue"; // 預設藍色
@@ -306,17 +305,9 @@ loadAllMarkersFromGitHub();
 			listItem.innerHTML = `
         <img src="${markerData.image}" class="thumbnail">
         <div class="photo-info">
-            <input type="text" class="photo-name" placeholder="輸入照片名稱" data-id="${markerData.id}" value="${markerData.name}">
-            <div class="category-tags">${tagHtml}</div> <!-- ✅ 新增標籤 -->
-			<div class="category-selection">
-                <label><input type="checkbox" value="花磚＆裝飾"> 花磚＆裝飾</label>
-                <label><input type="checkbox" value="洋樓＆房舍"> 洋樓＆房舍</label>
-                <label><input type="checkbox" value="風獅爺"> 風獅爺</label>
-				<label><input type="checkbox" value="軍事"> 軍事</label>
-				<label><input type="checkbox" value="其他"> 其他</label>
-            </div>
-            <button class="go-to-marker">查看</button>
-            <button class="delete-photo">刪除</button>
+                <span class="photo-name">${markerData.name}</span> <!-- 🚫 變更為不可編輯 -->
+                <div class="category-tags">${tagHtml}</div> <!-- ✅ 新增標籤 -->
+                <button class="go-to-marker">查看</button>
         </div>
     `;
 		function getCategoryClass(category) {
@@ -380,10 +371,7 @@ loadAllMarkersFromGitHub();
 				});
 				marker.openPopup();
 			});
-			// 綁定刪除按鈕事件
-			listItem.querySelector(".delete-photo").addEventListener("click", function() {
-				deleteMarker(markerData.id, listItem, marker);
-			});
+			
 			// ✅ 讓最新上傳的照片排在最左邊
 			let photoList = document.getElementById("photoList");
 			photoList.prepend(listItem); // **使用 prepend() 而不是 appendChild()**
